@@ -1,0 +1,26 @@
+.navbar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background:rgb(3, 234, 65);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 10px;
+}
+.left-nav{
+    display: flex;
+    align-items: center;
+}
+.home-btn{
+    width: 20px;
+}
+
+
+.right-nav{
+    display: flex;
+}
+.cart{
+    margin-left: 15px;
+    cursor: pointer;
+}

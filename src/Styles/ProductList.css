@@ -1,0 +1,9 @@
+.product_list{
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: auto;
+    cursor: pointer;
+}
