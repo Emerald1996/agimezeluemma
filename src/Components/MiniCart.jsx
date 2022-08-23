@@ -34,7 +34,7 @@ export class MiniCart extends Component {
               <div className="mini-cart-info">
                 <h3>{cartItem.data.name}</h3>
                 <p>{cartItem.data.brand}</p>
-                <h4>{cartItem.data.prices[0].currency.symbol}{ ( cartItem.data.prices[0].amount * cartItem.cartQty).toFixed(2)}</h4>
+                <h4>{currentCurrency} { ( cartItem.data.prices[0].amount * cartItem.cartQty).toFixed(2)}</h4>
 
                 <div className="mini-cart-swatches">
                   {/* {Object.values(cartItem.data.attributes).map((attribute) => {

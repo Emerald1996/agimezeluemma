@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import "../Styles/CartPage.css"
 import { Link } from 'react-router-dom'
-import { deleteCartItem , addToCart , decreaseCartQty , totalSum } from '../Redux/cartSlice'
+import { deleteCartItem , addToCart , decreaseCartQty } from '../Redux/cartSlice'
 
 export class CartPage extends Component {
 
@@ -64,7 +64,7 @@ export class CartPage extends Component {
               <div className="cart-info">
                 <h3>{cartItem.data.name}</h3>
                 <p>{cartItem.brand}</p>
-                <h4>${( cartItem.data.prices[0].amount * cartItem.cartQty).toFixed(2)}</h4>
+                <h4>{currentCurrency} {( cartItem.data.prices[0].amount * cartItem.cartQty).toFixed(2)}</h4>
 
                 <div className="cart-swatches">
                   
@@ -142,7 +142,6 @@ const mapDispatchToProps = () => {
     addToCart,
     deleteCartItem,
     decreaseCartQty,
-    totalSum
   }
 }
 

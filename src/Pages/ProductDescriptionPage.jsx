@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ProductChoice from '../Components/ProductChoice'
 import "../Styles/ProductDescriptionPage.css"
+import { connect } from 'react-redux'
 
 
 
@@ -25,6 +26,7 @@ export class ProductDescriptionPage extends Component {
 
   render() {
   const product = this.props
+  const {currentCurrency} = this.props
      return (
           <>
           
@@ -49,7 +51,7 @@ export class ProductDescriptionPage extends Component {
 
                 <div className="product_info">
                     <h1>{product.data.name}</h1>
-                    <h2>Price: {product.data.prices[0].currency.symbol}{product.data.prices[0].amount}</h2>
+                    <h2>Price: {currentCurrency} {product.data.prices[0].amount}</h2>
                     <h2>Brand: {product.data.brand}</h2>
                     <h5>{product.data.description}</h5>
                     <ProductChoice data={product.data} key={product.id} id={product.id}/> 
@@ -67,6 +69,10 @@ export class ProductDescriptionPage extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    currentCurrency: state.cart.currentCurrency,
+  }
+}
 
-
-export default ProductDescriptionPage
+export default connect(mapStateToProps)(ProductDescriptionPage)
