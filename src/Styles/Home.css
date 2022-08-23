@@ -51,3 +51,13 @@
     height: 300px;
     margin-left: 20%;
 }
+
+@media(max-width: 768px){
+    .banner{
+        flex-direction: column;
+    }
+    .banner-img>img{
+        margin-left: 2%;
+        margin-top: 5%;
+    }
+}

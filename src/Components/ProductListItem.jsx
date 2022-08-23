@@ -40,14 +40,14 @@ export class ProductListItem extends Component {
             )}
             <div className='product_tag'>
               <h3>{product.name}</h3>
-              <p>${product.prices[0].amount}</p>
+              <p>{product.prices[0].currency.symbol}{product.prices[0].amount}</p>
             </div>
           </div>
          </div>
         <div>
         </div>
           {this.state.selected && 
-           <ProductDescriptionPage productId ={this.state.selected} data={this.props.product} id={product.id} key={product.id}/>}
+           <ProductDescriptionPage productId ={this.state.selected} data={this.props.product} id={product.id} />}
       </>
 
     )

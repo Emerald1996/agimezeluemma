@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ProductDescriptionPage from "./Pages/ProductDescriptionPage";
 import CartPage from "./Pages/CartPage";
 import Navbar from "./Components/Navbar";
 import { Query } from "@apollo/client/react/components";
@@ -9,8 +8,11 @@ import Error from "./Components/Error";
 import Loading from "./Components/Loading";
 import CategoryPage from "./Pages/CategoryPage";
 import Home from "./Pages/Home";
+import {  totalSum } from "./Redux/cartSlice";
+import { connect } from "react-redux";
 
 class App extends Component {
+
   render() {
  
       return (
@@ -29,6 +31,7 @@ class App extends Component {
 
                     <Routes>
                       <Route path="/" element={<Home />} />
+                      
                       {data.categories.map((category) => {
                         return (
                           <Route
@@ -44,11 +47,6 @@ class App extends Component {
                         );
                       })}
                       <Route path="/cart" element={<CartPage />} />
-                      <Route
-                        exact
-                        path="/product/:id"
-                        element={<ProductDescriptionPage />}
-                      />
                       <Route path="*" element={<Error />} />
                     </Routes>
                   </Router>
@@ -75,6 +73,7 @@ const GET_DATA = gql`
         brand
         inStock
         gallery
+        description
         prices {
           amount
           currency {
@@ -97,4 +96,16 @@ const GET_DATA = gql`
 `;
 
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    cart: state.cart,
+  };
+};
+
+const mapDispatchToProps = () => {
+  return {
+    totalSum,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps())(App);

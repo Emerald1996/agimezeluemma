@@ -7,7 +7,7 @@
     cursor: not-allowed;
 }
 .no_stock{
-    color: red;
+    color: rgb(197, 193, 193);
     font-size: 30px;
     font-weight: bold;
     position: absolute;

@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import ProductChoice from '../Components/ProductChoice'
 import "../Styles/ProductDescriptionPage.css"
-import { addToCart } from '../Redux/cartSlice'
-import { connect } from "react-redux"
+
 
 
 export class ProductDescriptionPage extends Component {
@@ -12,7 +11,7 @@ export class ProductDescriptionPage extends Component {
  
    this.state = {
       imageArrIndex: 0,
-      hideModal: false
+      hideModal: false,
    }
  }
 
@@ -23,64 +22,45 @@ export class ProductDescriptionPage extends Component {
   hideModal = () => {
     this.setState({hideModal: !this.state.hideModal})
   }
- 
-  
+
   render() {
   const product = this.props
-
-   const addToCartBtn = {
-      width: '100%',
-      padding: '18px',
-      marginTop: '20px',
-      backgroundColor: 'rgba(19, 238, 19,0.9)',
-      borderRadius: '2rem',
-      color: 'white',
-      cursor: 'pointer',
-      border: 'none'
-    }
-
-    const noStock = {
-      color: 'rgb(255, 0, 0)',
-      fontSize: '30px',
-      textTransform: 'uppercase'
-    }
-  
      return (
           <>
           
             
             {!this.state.hideModal &&<div className="outer-modal">
-              <div className="product_desc_page">
-              <h1 onClick={()=>this.hideModal()} className="modalBtn">❌</h1>
-              <div className='product_image'>
-                <img src={product.data.gallery[this.state.imageArrIndex]} alt={product.data.name} />
-                
-                <div className='small_image'>
-                {product.data.gallery.map((img, index)=>{
-                  return <img src={img} key={img}  alt={img}  onClick={()=>this.imageOnclick(index)}/>
-                })}
+
+             <div className="modal-container">
+
+                  <h1 onClick={()=>this.hideModal()} className="modalBtn">❌</h1>
+
+                <div className="product_desc_page">
+                  <div className='product_image'>
+                    <div className='small_image'>
+                      {product.data.gallery.map((img, index)=>{
+                        return <img src={img} key={img}  alt={img}  onClick={()=>this.imageOnclick(index)}/>
+                      })}
+                    </div>
+                    <img src={product.data.gallery[this.state.imageArrIndex]} alt={product.data.name}
+                    className="big-image" />
+                    
                 </div>
-              </div>
 
-              <div className="product_info">
-                  <h1>{product.data.name}</h1>
-                  <h2>Price: ${product.data.prices[0].amount}</h2>
-                  <h2>Brand: {product.data.brand}</h2>
-                  <ProductChoice data={product.data} key={product.id}/>
-
-                   {!this.props.data.inStock ? 
-      
-                    (<h3 style={noStock}> Out of stock 😥</h3>) :  
-                    (<button style={addToCartBtn} onClick={ () => this.props.addToCart((product)) }>ADD TO CART </button>)
-                  }
-                  
-              </div>
+                <div className="product_info">
+                    <h1>{product.data.name}</h1>
+                    <h2>Price: {product.data.prices[0].currency.symbol}{product.data.prices[0].amount}</h2>
+                    <h2>Brand: {product.data.brand}</h2>
+                    <h5>{product.data.description}</h5>
+                    <ProductChoice data={product.data} key={product.id} id={product.id}/> 
+                </div>
 
             </div>
+
+             </div>
             
             </div>}
             
-         
 
           </>
          )
@@ -89,10 +69,4 @@ export class ProductDescriptionPage extends Component {
 
 
 
-const mapDispatchToProps = ()=>{
-        return (
-          {addToCart}
-        )
-      }
-
-export default connect(null, mapDispatchToProps())(ProductDescriptionPage)
+export default ProductDescriptionPage
